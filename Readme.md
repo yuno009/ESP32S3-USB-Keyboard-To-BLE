@@ -12,6 +12,8 @@ Transform any USB keyboard into a Bluetooth wireless keyboard using ESP32-S3's n
 
 Plug a USB keyboard into ESP32-S3's USB-C port and it becomes a Bluetooth keyboard that can connect to any BLE-compatible device (Windows, macOS, Linux, iOS, Android).
 
+[![Demo](https://img.youtube.com/vi/dVUMYTfJw0s/maxresdefault.jpg)](https://youtu.be/dVUMYTfJw0s)
+
 ## Features
 
 - **Native USB Host** - Uses ESP32-S3's hardware USB-OTG (no software emulation)
